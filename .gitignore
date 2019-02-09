@@ -1,0 +1,20 @@
+# User-specific stuff:
+/.idea
+/dist
+/node_modules
+
+#Settings Project
+settings-project.json
+
+*.d.ts
+*.js.map
+
+src/store/**/*.js
+src/interface/**/*.js
+src/js/**/*.js
+
+package-lock.json
+
+pull.sh
+
+robots.txt
