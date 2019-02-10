@@ -1,12 +1,5 @@
-const qs = require('querystring');
 const fs = require('fs');
 const path = require('path');
-
-const saveUser = user => {
-  const username = JSON.parse(user).username;
-  const usersPath = path.join(__dirname, "../../db/users/" + `${username}.json`);
-  fs.writeFileSync(usersPath, user);
-};
 
 const signUpRoute = (request, response) => {
 
@@ -18,11 +11,15 @@ const signUpRoute = (request, response) => {
     });
 
     request.on('end', function () {
-      const post = qs.parse(body);
-      saveUser(post.user);
+      let post = JSON.parse(body);
+      const {username} = post;
+
+      const usersPath = path.join(__dirname, "../../db/users/" + `${username}.json`);
+      fs.writeFileSync(usersPath, body);
+      //saveUser(post);
 
       response.writeHead(200, {"Content-Type": "application/json"});
-      response.write(JSON.stringify({ status: 'success', user: JSON.parse(post.user)}));
+      response.write(JSON.stringify({ status: 'success', user: post}));
       response.end();
 
     });
