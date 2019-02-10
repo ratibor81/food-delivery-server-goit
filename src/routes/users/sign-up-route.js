@@ -15,8 +15,7 @@ const signUpRoute = (request, response) => {
       const {username} = post;
 
       const usersPath = path.join(__dirname, "../../db/users/" + `${username}.json`);
-      fs.writeFileSync(usersPath, body);
-      //saveUser(post);
+      fs.writeFile(usersPath, JSON.stringify(post));
 
       response.writeHead(200, {"Content-Type": "application/json"});
       response.write(JSON.stringify({ status: 'success', user: post}));
